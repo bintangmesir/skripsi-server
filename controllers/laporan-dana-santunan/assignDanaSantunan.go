@@ -10,16 +10,25 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"gorm.io/gorm/clause"
 )
 
 func AssignDanaSantunan(c *fiber.Ctx) error {
+
+	idParams := c.Params("id")
+	// * Check if data exist
+	laporanDanaSantunan := models.LaporanDanaSantunan{LaporanDanaSantunanId: idParams}
+	if err := config.DB.Preload(clause.Associations).First(&laporanDanaSantunan).Error; err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"message": "Data laporan dana santunan tidak ditemukan.",
+		})
+	}
 
 	form, err := c.MultipartForm()
 	if err != nil {
 		return err
 	}
 
-	laporanDanaSantunanId := form.Value["laporanDanaSantunanId"][0]
 	danaSantunanId := form.Value["danaSantunanId"][0]
 	tanggal := form.Value["tanggal"][0]
 	tipe := form.Value["tipe"][0]
@@ -27,13 +36,6 @@ func AssignDanaSantunan(c *fiber.Ctx) error {
 	index := form.Value["index"][0]
 	nominal := form.Value["nominal"][0]
 	keterangan := form.Value["keterangan"][0]
-
-	laporanDanaSantunan := models.LaporanDanaSantunan{LaporanDanaSantunanId: laporanDanaSantunanId}
-	if err := config.DB.First(&laporanDanaSantunan).Error; err != nil {
-		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"message": "Data laporan dana santunan tidak ditemukan.",
-		})
-	}
 
 	//* Handle tanggal
 	tanggalParsedDate, err := time.Parse("Mon Jan 2 2006 15:04:05 GMT+0700 (Western Indonesia Time)", tanggal)
@@ -80,7 +82,7 @@ func AssignDanaSantunan(c *fiber.Ctx) error {
 			Validasi:              models.ValidationEnum(validasi),
 			UpdatedAt:             time.Now(),
 			PengurusId:            &id,
-			LaporanDanaSantunanId: &laporanDanaSantunanId,
+			LaporanDanaSantunanId: &idParams,
 		}
 
 		config.DB.Create(&newDanaSantunan)
@@ -99,7 +101,7 @@ func AssignDanaSantunan(c *fiber.Ctx) error {
 			Nominal:               nominalConverted,
 			Validasi:              models.ValidationEnum(validasi),
 			UpdatedAt:             time.Now(),
-			LaporanDanaSantunanId: &laporanDanaSantunanId,
+			LaporanDanaSantunanId: &idParams,
 			PengurusId:            &id,
 		}
 

@@ -109,7 +109,7 @@ func AnakYatimUpdate(c *fiber.Ctx) error {
 	config.DB.Model(&anakYatim).Updates(&newAnakYatim)
 
 	if statusSantunan == "BELUM_MEMILIKI" {
-		config.DB.Model(&anakYatim).Update("DonaturId", nil)
+		config.DB.Model(&anakYatim).Where("anak_yatim_id = ?", id).Update("DonaturId", nil)
 	}
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{

@@ -31,5 +31,6 @@ type StatusEnum string
 
 const (
 	BelumMemiliki StatusEnum = "BELUM_MEMILIKI"
-	SudahMemiliki StatusEnum = "SUDAH_MEMILIKI"
+	NonAktif      StatusEnum = "NON_AKTIF"
+	Aktif         StatusEnum = "AKTIF"
 )

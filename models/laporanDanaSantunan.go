@@ -6,7 +6,7 @@ import (
 
 type LaporanDanaSantunan struct {
 	LaporanDanaSantunanId string         `gorm:"primaryKey;unique;size:10" json:"laporan_dana_santunan_id"`
-	Judul                 string         `gorm:"size:50" json:"judul"`
+	Judul                 string         `gorm:"size:100" json:"judul"`
 	Keterangan            *string        `gorm:"size:255;not null" json:"keterangan"`
 	SaldoAwal             int            `json:"saldo_awal"`
 	SaldoSisa             int            `json:"saldo_sisa"`

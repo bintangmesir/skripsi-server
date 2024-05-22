@@ -53,6 +53,11 @@ func DanaSantunanAnakAsuhCreateTransfer(c *fiber.Ctx) error {
 		AnakYatimId: &anakYatimId,
 	}
 
+	newAnakYatim := models.AnakYatim{
+		StatusSantunan: models.Aktif,
+		DonaturId:      &donaturId,
+	}
+
 	if nomorTransferMidtrans == "" {
 		//* Handle nomor transfer
 		nomorTransfer, err := HandleDanaSantunanAnakAsuhId()
@@ -84,6 +89,7 @@ func DanaSantunanAnakAsuhCreateTransfer(c *fiber.Ctx) error {
 	newDanaTransfer.File = &uploadedFileNames
 
 	config.DB.Create(&newDanaTransfer)
+	config.DB.Model(&anakYatim).Updates(&newAnakYatim)
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"message": "Data dana transfer berhasil di tambah",

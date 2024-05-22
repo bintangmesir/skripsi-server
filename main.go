@@ -28,6 +28,7 @@ func main() {
 
 	routes.MidtransRoute(app)
 	routes.AuthRoute(app)
+	routes.SantunanRoute(app)
 	routes.PengurusRoute(app)
 	routes.DonaturRoute(app)
 	routes.ProfileRoute(app)

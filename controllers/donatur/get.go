@@ -30,6 +30,7 @@ func DonaturGet(c *fiber.Ctx) error {
 			"no_handphone":  p.NoHandphone,
 			"validasi":      p.Validasi,
 			"pengurus_id":   p.PengurusId,
+			"anak_yatim":    p.AnakYatim,
 			"created_at":    p.CreatedAt,
 			"updated_at":    p.UpdatedAt,
 		}

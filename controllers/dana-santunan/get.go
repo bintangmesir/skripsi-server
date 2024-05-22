@@ -24,17 +24,18 @@ func DanaSantunanGet(c *fiber.Ctx) error {
 	for _, ds := range danaSantunan {
 
 		dsJSON := map[string]interface{}{
-			"dana_santunan_id": ds.DanaSantunanId,
-			"index":            ds.Index,
-			"tanggal":          ds.Tanggal,
-			"nama":             ds.Nama,
-			"keterangan":       ds.Keterangan,
-			"tipe":             ds.Tipe,
-			"nominal":          ds.Nominal,
-			"validasi":         ds.Validasi,
-			"pengurus_id":      ds.PengurusId,
-			"created_at":       ds.CreatedAt,
-			"updated_at":       ds.UpdatedAt,
+			"dana_santunan_id":         ds.DanaSantunanId,
+			"index":                    ds.Index,
+			"tanggal":                  ds.Tanggal,
+			"nama":                     ds.Nama,
+			"keterangan":               ds.Keterangan,
+			"tipe":                     ds.Tipe,
+			"nominal":                  ds.Nominal,
+			"validasi":                 ds.Validasi,
+			"pengurus_id":              ds.PengurusId,
+			"laporan_dana_santunan_id": ds.LaporanDanaSantunanId,
+			"created_at":               ds.CreatedAt,
+			"updated_at":               ds.UpdatedAt,
 		}
 
 		if ds.File != nil {

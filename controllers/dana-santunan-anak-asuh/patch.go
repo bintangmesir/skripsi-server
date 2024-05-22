@@ -69,7 +69,7 @@ func DanaSantunanAnakAsuhUpdate(c *fiber.Ctx) error {
 
 	if validasi == "DIVERIFIKASI" {
 		newAnakYatim := models.AnakYatim{
-			StatusSantunan:  models.SudahMemiliki,
+			StatusSantunan:  models.Aktif,
 			NominalSantunan: anakYatim.NominalSantunan + nominalConverted,
 		}
 
