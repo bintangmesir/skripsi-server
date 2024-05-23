@@ -1,7 +1,6 @@
 package midtranscontroller
 
 import (
-	"fmt"
 	"os"
 	danasantunananakasuh "server/controllers/dana-santunan-anak-asuh"
 	"server/pkg"
@@ -34,8 +33,6 @@ func MidtransDanaSantunanAnakAsuhCreate(c *fiber.Ctx) error {
 			"message": "Mohon maaf terjadi kesalahan pada server.",
 		})
 	}
-
-	fmt.Println(danaSantunanAnakAsuhId)
 
 	midtrans.ServerKey = pkg.MIDTRANS_SECRET_KEY
 	if os.Getenv("APP_ENV") == "PRODUCTION" {

@@ -1,6 +1,6 @@
 module server
 
-go 1.22.1
+go 1.22.3
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect

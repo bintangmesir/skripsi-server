@@ -57,6 +57,8 @@ func LoginPengurus(c *fiber.Ctx) error {
 		Value:    token,
 		Expires:  time.Now().Add(time.Hour * 24),
 		HTTPOnly: true,
+		Secure:   true,
+		Domain:   "https://al-ikhlash-plumpang.online",
 	}
 	c.Cookie(&cookie)
 
