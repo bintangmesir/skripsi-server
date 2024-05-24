@@ -57,6 +57,8 @@ func LoginDonatur(c *fiber.Ctx) error {
 		Value:    token,
 		Expires:  time.Now().Add(time.Hour * 24),
 		HTTPOnly: true,
+		Secure:   true,
+		SameSite: "Strict",
 	}
 	c.Cookie(&cookie)
 
