@@ -24,7 +24,7 @@ func DatabaseConnection(DB_USER string, DB_PASSWORD string, DB_URI string, DB_NA
 		panic("Tidak bisa menghubungkan pada database...")
 	}
 
-	// if err := db.AutoMigrate(&models.DanaSantunanAnakAsuh{}, &models.DanaSantunan{}); err != nil {
+	// if err := db.AutoMigrate(&models.LaporanDanaSantunanAnakAsuh{}, &models.DanaSantunanAnakAsuh{}); err != nil {
 	// 	panic(err)
 	// }
 

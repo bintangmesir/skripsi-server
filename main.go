@@ -24,7 +24,7 @@ func main() {
 		AllowHeaders:     "Origin, Content-Type, Accept",
 	}))
 
-	app.Static("/", pkg.DIR_PUBLIC)
+	app.Static("/api", pkg.DIR_PUBLIC)
 
 	routes.MidtransRoute(app)
 	routes.AuthRoute(app)
@@ -35,6 +35,7 @@ func main() {
 	routes.AnakYatimRoute(app)
 	routes.DanaSantunanRoute(app)
 	routes.LaporanDanaSantunanRoute(app)
+	routes.LaporanDanaSantunanAnakAsuhRoute(app)
 	routes.DanaSantunanAnakAsuhRoute(app)
 	routes.DataCountRoute(app)
 

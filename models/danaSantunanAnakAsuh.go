@@ -6,7 +6,7 @@ import (
 
 type DanaSantunanAnakAsuh struct {
 	DanaSantunanAnakAsuhId string         `gorm:"primaryKey;unique;size:50" json:"dana_santunan_anak_asuh_id"`
-	Index                  int            `json:"index"`
+	Index                  *int           `json:"index"`
 	Tanggal                time.Time      `gorm:"default:CURRENT_TIMESTAMP()" json:"tanggal"`
 	Nominal                int            `json:"nominal"`
 	Tipe                   PembayaranEnum `gorm:"size:6;default:DEBIT" json:"tipe"`
@@ -24,4 +24,7 @@ type DanaSantunanAnakAsuh struct {
 
 	AnakYatimId *string   `gorm:"size:10" json:"anak_yatim_id"`
 	AnakYatim   AnakYatim `json:"anak_yatim"`
+
+	LaporanDanaSantunanAnakAsuhId *string                     `gorm:"size:10" json:"laporan_dana_santunan_anak_asuh_id"`
+	LaporanDanaSantunanAnakAsuh   LaporanDanaSantunanAnakAsuh `json:"laporan_dana_santunan_anak_asuh"`
 }

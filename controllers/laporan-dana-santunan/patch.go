@@ -47,14 +47,6 @@ func LaporanDanaSantunanUpdate(c *fiber.Ctx) error {
 		})
 	}
 
-	// * Handle Anak Yatim Id
-	laporanDanaSantunanId, err := HandleLaporanDanaSantunanId()
-	if err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"message": "Mohon maaf terjadi kesalahan pada server.",
-		})
-	}
-
 	id, err := pkg.GetUserActive(c)
 	if err != nil {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
@@ -63,7 +55,7 @@ func LaporanDanaSantunanUpdate(c *fiber.Ctx) error {
 	}
 
 	var danaSantunan []models.DanaSantunan
-	if err := config.DB.Where("laporan_dana_santunan_id = ? AND tipe = ?", id, "KREDIT").Find(&danaSantunan).Error; err == nil {
+	if err := config.DB.Where("laporan_dana_santunan_id = ? AND tipe = ?", idParams, "KREDIT").Find(&danaSantunan).Error; err == nil {
 		for _, dana := range danaSantunan {
 			if dana.File != nil {
 				// * Handle If File Doesn't Exist
@@ -74,13 +66,13 @@ func LaporanDanaSantunanUpdate(c *fiber.Ctx) error {
 				}
 			}
 		}
-		config.DB.Where("laporan_dana_santunan_id = ? AND tipe = ?", id, "KREDIT").Delete(&models.DanaSantunan{})
+		config.DB.Where("laporan_dana_santunan_id = ? AND tipe = ?", idParams, "KREDIT").Delete(&models.DanaSantunan{})
 	}
 
 	config.DB.Delete(&laporanDanaSantunan)
 
 	newLaporanDanaSantunan := models.LaporanDanaSantunan{
-		LaporanDanaSantunanId: laporanDanaSantunanId,
+		LaporanDanaSantunanId: idParams,
 		Judul:                 judul,
 		Keterangan:            &keterangan,
 		SaldoAwal:             saldoAwalConverted,
@@ -93,6 +85,6 @@ func LaporanDanaSantunanUpdate(c *fiber.Ctx) error {
 	config.DB.Create(&newLaporanDanaSantunan)
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
-		"data": laporanDanaSantunanId,
+		"data": idParams,
 	})
 }

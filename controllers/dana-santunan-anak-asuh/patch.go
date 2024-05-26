@@ -1,6 +1,7 @@
 package danasantunananakasuh
 
 import (
+	"log"
 	"server/config"
 	"server/models"
 	"server/pkg"
@@ -33,10 +34,21 @@ func DanaSantunanAnakAsuhUpdate(c *fiber.Ctx) error {
 		return err
 	}
 
+	tanggal := form.Value["tanggal"][0]
 	nominal := form.Value["nominal"][0]
 	keterangan := form.Value["keterangan"][0]
 	validasi := form.Value["validasi"][0]
 	file := form.File["file"]
+
+	//* Handle tanggal
+	location, err := time.LoadLocation("Asia/Jakarta")
+	if err != nil {
+		log.Fatal(err)
+	}
+	tanggalParsedDate, err := time.ParseInLocation("Mon Jan 2 2006 15:04:05 GMT+0700 (Western Indonesia Time)", tanggal, location)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	nominalConverted, err := strconv.Atoi(nominal)
 	if err != nil {
@@ -46,6 +58,7 @@ func DanaSantunanAnakAsuhUpdate(c *fiber.Ctx) error {
 	}
 
 	newDanaSantunanAnakAsuh := models.DanaSantunanAnakAsuh{
+		Tanggal:    tanggalParsedDate,
 		Keterangan: &keterangan,
 		Nominal:    nominalConverted,
 		Validasi:   models.ValidationEnum(validasi),

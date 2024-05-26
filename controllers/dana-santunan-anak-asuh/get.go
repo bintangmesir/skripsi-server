@@ -24,20 +24,21 @@ func DanaSantunaAnakAsuhnGet(c *fiber.Ctx) error {
 	for _, ds := range danaSantunanAnakAsuh {
 
 		dsJSON := map[string]interface{}{
-			"dana_santunan_anak_asuh_id": ds.DanaSantunanAnakAsuhId,
-			"index":                      ds.Index,
-			"tanggal":                    ds.Tanggal,
-			"keterangan":                 ds.Keterangan,
-			"tipe":                       ds.Tipe,
-			"nominal":                    ds.Nominal,
-			"validasi":                   ds.Validasi,
-			"pengurus_id":                ds.PengurusId,
-			"anak_yatim_id":              ds.AnakYatimId,
-			"anak_yatim":                 ds.AnakYatim,
-			"donatur_id":                 ds.DonaturId,
-			"donatur":                    ds.Donatur,
-			"created_at":                 ds.CreatedAt,
-			"updated_at":                 ds.UpdatedAt,
+			"dana_santunan_anak_asuh_id":         ds.DanaSantunanAnakAsuhId,
+			"index":                              ds.Index,
+			"tanggal":                            ds.Tanggal,
+			"keterangan":                         ds.Keterangan,
+			"tipe":                               ds.Tipe,
+			"nominal":                            ds.Nominal,
+			"validasi":                           ds.Validasi,
+			"pengurus_id":                        ds.PengurusId,
+			"anak_yatim_id":                      ds.AnakYatimId,
+			"anak_yatim":                         ds.AnakYatim,
+			"laporan_dana_santunan_anak_asuh_id": ds.LaporanDanaSantunanAnakAsuhId,
+			"donatur_id":                         ds.DonaturId,
+			"donatur":                            ds.Donatur,
+			"created_at":                         ds.CreatedAt,
+			"updated_at":                         ds.UpdatedAt,
 		}
 
 		if ds.File != nil {

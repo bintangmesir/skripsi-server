@@ -63,7 +63,11 @@ func AnakYatimUpdate(c *fiber.Ctx) error {
 		})
 	}
 
-	parsedDate, err := time.Parse("Mon Jan 2 2006 15:04:05 GMT+0700 (Western Indonesia Time)", tanggalLahir)
+	location, err := time.LoadLocation("Asia/Jakarta")
+	if err != nil {
+		log.Fatal(err)
+	}
+	parsedDate, err := time.ParseInLocation("Mon Jan 2 2006 15:04:05 GMT+0700 (Western Indonesia Time)", tanggalLahir, location)
 	if err != nil {
 		log.Fatal(err)
 	}

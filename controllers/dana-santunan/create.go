@@ -34,7 +34,12 @@ func DanaSantunanCreate(c *fiber.Ctx) error {
 	}
 
 	//* Handle tanggal
-	tanggalParsedDate, err := time.Parse("Mon Jan 2 2006 15:04:05 GMT+0700 (Western Indonesia Time)", tanggal)
+	//* Handle tanggal
+	location, err := time.LoadLocation("Asia/Jakarta")
+	if err != nil {
+		log.Fatal(err)
+	}
+	tanggalParsedDate, err := time.ParseInLocation("Mon Jan 2 2006 15:04:05 GMT+0700 (Western Indonesia Time)", tanggal, location)
 	if err != nil {
 		log.Fatal(err)
 	}
