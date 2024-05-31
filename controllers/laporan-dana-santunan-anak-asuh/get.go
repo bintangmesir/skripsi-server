@@ -33,6 +33,7 @@ func LaporanDanaSantunanAnakAsuhGet(c *fiber.Ctx) error {
 			"tanda_tangan":                       ds.TandaTangan,
 			"keterangan":                         ds.Keterangan,
 			"validasi":                           ds.Validasi,
+			"dana_santunan_anak_asuh":            ds.DanaSantunanAnakAsuh,
 			"pengurus_id":                        ds.PengurusId,
 			"donatur_id":                         ds.DonaturId,
 			"created_at":                         ds.CreatedAt,

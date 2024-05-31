@@ -31,6 +31,7 @@ func AssignDanaSantunanAnakAsuh(c *fiber.Ctx) error {
 
 	danaSantunanAnakAsuhId := form.Value["danaSantunanAnakAsuhId"][0]
 	tanggal := form.Value["tanggal"][0]
+	keterangan := form.Value["keterangan"][0]
 	tipe := form.Value["tipe"][0]
 	validasi := form.Value["validasi"][0]
 	index := form.Value["index"][0]
@@ -75,6 +76,7 @@ func AssignDanaSantunanAnakAsuh(c *fiber.Ctx) error {
 			DanaSantunanAnakAsuhId:        danaSantunanAnakAsuhId,
 			Index:                         &indexConverted,
 			Tipe:                          models.PembayaranEnum(tipe),
+			Keterangan:                    &keterangan,
 			Tanggal:                       tanggalParsedDate,
 			Nominal:                       nominalConverted,
 			Validasi:                      models.ValidationEnum(validasi),

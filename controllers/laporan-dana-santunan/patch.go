@@ -54,21 +54,6 @@ func LaporanDanaSantunanUpdate(c *fiber.Ctx) error {
 		})
 	}
 
-	var danaSantunan []models.DanaSantunan
-	if err := config.DB.Where("laporan_dana_santunan_id = ? AND tipe = ?", idParams, "KREDIT").Find(&danaSantunan).Error; err == nil {
-		for _, dana := range danaSantunan {
-			if dana.File != nil {
-				// * Handle If File Doesn't Exist
-				if err := pkg.DeleteFile(dana.File, pkg.DIR_IMG_BUKTI_PENGGUNAAN); err != nil {
-					return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-						"message": "Mohon maaf terjadi kesalahan pada server.",
-					})
-				}
-			}
-		}
-		config.DB.Where("laporan_dana_santunan_id = ? AND tipe = ?", idParams, "KREDIT").Delete(&models.DanaSantunan{})
-	}
-
 	config.DB.Delete(&laporanDanaSantunan)
 
 	newLaporanDanaSantunan := models.LaporanDanaSantunan{
